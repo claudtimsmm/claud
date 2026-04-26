@@ -1,3 +1,7 @@
+نعم، يمكنك ذلك بسهولة. في معظم خوادم الويب (Web Servers) وعند استخدام استضافة مثل Firebase Hosting أو GitHub Pages، يتم التعرف على ملف index.html تلقائيًا كملف رئيسي للمجلد.
+لذلك، يمكنك استبدال الرابط بـ /Dashboard/ وسيقوم المتصفح بفتح ملف index.html الموجود بداخله تلقائيًا دون إظهار اسم الملف في شريط العنوان.
+إليك الكود المحدث:
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -179,10 +183,8 @@
             try {
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
-                    // الانتقال إلى المجلد
-                    window.location.href = "./Dashboard/index.html";
-                    // إخفاء المسار من شريط العنوان ليظهر النطاق فقط
-                    window.history.replaceState(null, "", "/");
+                    // التوجيه إلى المجلد مباشرة بدون اسم الملف
+                    window.location.href = "Dashboard/";
                 }
             } catch (error) {
                 console.error("Authentication Error:", error.message);
@@ -193,3 +195,5 @@
 
 </body>
 </html>
+
+```

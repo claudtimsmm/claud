@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>claudsmm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+        }
 
+        .main-content {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+        }
+
+        /* --- Wallet Section --- */
+        .wallet-section {
+            background-color: #ffffff;
+            padding: 30px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            direction: rtl;
+        }
+
+        .wallet-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 0 0 4px 0;
+        }
+
+        .wallet-balance {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .deposit-btn {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* --- Minimalist Form --- */
+        .order-form {
+            padding: 0 24px 40px;
+            direction: rtl;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            border-bottom: 2px solid #f1f5f9;
+            transition: border-color 0.3s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #0f172a;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 0;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: #0f172a;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        select.form-control {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: none;
+            height: 60px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .row-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* --- Footer Info --- */
+        .summary-card {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .summary-item {
+            text-align: center;
+        }
+
+        .summary-label {
+            display: block;
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .summary-value {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 1rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 30px;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        <div class="wallet-section">
+            <div>
+                <p class="wallet-label">Available Balance</p>
+                <p class="wallet-balance">$0.00</p>
+            </div>
+            <button class="deposit-btn">Top Up</button>
+        </div>
+
+        <div class="order-form">
+            <div class="form-group">
+                <label>Service Category</label>
+                <div class="input-wrapper">
+                    <select class="form-control">
+                        <option selected disabled>Select a service</option>
+                        <option>Instagram Followers</option>
+                        <option>TikTok Views</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Target Link</label>
+                <div class="input-wrapper">
+                    <input type="text" class="form-control" placeholder="https://...">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <div class="input-wrapper">
+                    <textarea class="form-control" readonly>High quality, non-drop service with instant start.</textarea>
+                </div>
+            </div>
+
+            <div class="row-grid">
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <div class="input-wrapper">
+                        <input type="number" class="form-control" placeholder="1000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Est. Delivery</label>
+                    <div class="input-wrapper">
+                        <input type="text" class="form-control" value="12 - 24h" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-item">
+                    <span class="summary-label">Price per 1k</span>
+                    <span class="summary-value">$1.20</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Total Charge</span>
+                    <span class="summary-value">$0.00</span>
+                </div>
+            </div>
+
+            <button class="buy-btn">Confirm Order</button>
+        </div>
+    </div>
+
+</body>
+</html>
+
+```

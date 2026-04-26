@@ -179,7 +179,8 @@
             try {
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
-                    window.location.href = "./Dashboard/index.html";
+                    // التوجيه إلى المجلد مباشرة بدون اسم الملف
+                    window.location.href = "Dashboard/";
                 }
             } catch (error) {
                 console.error("Authentication Error:", error.message);

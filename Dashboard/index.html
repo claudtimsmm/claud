@@ -1,1 +1,298 @@
-jddj
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>claudsmm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* الحل الجذري: تثبيت الجسم ومنع السحب الخارجي */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* يمنع سحب الصفحة كاملة في آيفون */
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+        }
+
+        /* حاوية التمرير الداخلية */
+        .main-content {
+            height: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-top: 70px; /* مساحة الهيدر */
+            padding-bottom: 80px; /* مساحة الناف بار */
+            box-sizing: border-box;
+        }
+
+        /* --- Header Section --- */
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background-color: #f7fafc; 
+            position: absolute; /* تغيير إلى absolute لضمان الثبات التام داخل الحاوية الأم */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: lowercase;
+            color: #1e293b;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.2s;
+            background-color: #5570f4;
+        }
+
+        .btn-notes { background-color: #5570f4; }
+        .btn-report { background-color: #5570f4; }
+        .icon-circle:active { transform: scale(0.95); }
+
+        svg { width: 20px; height: 20px; fill: #ffffff; }
+
+        /* --- Wallet Section --- */
+        .wallet-section {
+            background-color: #f8fafc;
+            padding: 40px 20px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            direction: rtl;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .wallet-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wallet-details {
+            text-align: right;
+        }
+
+        .wallet-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin: 0;
+            margin-bottom: 4px;
+        }
+
+        .wallet-balance {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .deposit-btn {
+            background-color: #1e293b;
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .deposit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* --- Services Grid Section --- */
+        .services-container {
+            padding: 20px 0 20px 20px;
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 20px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory; 
+            scroll-behavior: smooth;
+        }
+
+        .services-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 25.7%;
+            scroll-snap-align: start; 
+        }
+
+        .service-circle {
+            width: 65px;
+            height: 65px;
+            background-color: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .service-circle:active {
+            border-color: #5570f4;
+            transform: scale(0.95);
+        }
+
+        .service-circle svg {
+            width: 28px;
+            height: 28px;
+            fill: #5570f4;
+        }
+
+        .service-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #475569;
+            white-space: nowrap;
+        }
+
+        /* --- Bottom Navigation --- */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: #f7fafc; 
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 9999;
+            direction: rtl;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #64748b;
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: #5570f4;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="icon-circle btn-notes">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        </button>
+
+        <div class="logo">claudsmm</div>
+
+        <button class="icon-circle btn-report">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        </button>
+    </header>
+
+    <div class="main-content">
+        <div class="wallet-section">
+            <div class="wallet-info">
+                <div class="wallet-details">
+                    <p class="wallet-label">رصيدي</p>
+                    <p class="wallet-balance">$0.00</p>
+                </div>
+            </div>
+            <button class="deposit-btn">إيداع</button>
+        </div>
+
+        <div class="services-container">
+            <div class="service-item">
+                <div class="service-circle">
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </div>
+                <span class="service-name">إيداع</span>
+            </div>
+
+            <div class="service-item">
+                <div class="service-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                </div>
+                <span class="service-name">خدمات SMM</span>
+            </div>
+
+            <div class="service-item">
+                <div class="service-circle">
+                    <svg viewBox="0 0 24 24"><path d="M13 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-7-6zm3 14H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <span class="service-name">المعاملات</span>
+            </div>
+
+            <div class="service-item">
+                <div class="service-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm1 10V7h-2v7h6v-2h-4z"/></svg>
+                </div>
+                <span class="service-name">قيد التنفيذ</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span class="nav-label">الرئيسية</span>
+        </a>
+        <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z"/></svg>
+            <span class="nav-label">الخدمات</span>
+        </a>
+        <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span class="nav-label">حسابي</span>
+        </a>
+    </nav>
+
+</body>
+</html>

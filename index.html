@@ -153,9 +153,10 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
 
+        // الإعدادات المحدثة بالدومين الخاص بك claudsmm.com
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
-            authDomain: "claudsmm.com", // تم التحديث للدومين الخاص بك
+            authDomain: "claudsmm.com", 
             projectId: "claudsmm-1bf0e",
             storageBucket: "claudsmm-1bf0e.firebasestorage.app",
             messagingSenderId: "1028854156095",
@@ -166,18 +167,27 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
+        // حفظ جلسة الدخول
         setPersistence(auth, browserLocalPersistence);
 
         const loginBtn = document.getElementById('googleSignInBtn');
         
         loginBtn.onclick = async () => {
             try {
+                // استخدام النافذة المنبثقة
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
+                    // الانتقال إلى لوحة التحكم عند النجاح
                     window.location.href = "Dashboard/";
                 }
             } catch (error) {
                 console.error("Auth Error:", error.code);
+                // تنبيه المستخدم في حال وجود مشكلة تقنية
+                if (error.code === 'auth/operation-not-supported-in-this-environment') {
+                    alert("تأكد من فتح الموقع عبر دومينك claudsmm.com وليس رابط github.io المباشر.");
+                } else {
+                    alert("حدث خطأ أثناء تسجيل الدخول: " + error.message);
+                }
             }
         };
     </script>

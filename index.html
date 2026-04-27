@@ -175,12 +175,14 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // تفعيل استمرار الجلسة حتى بعد إغلاق المتصفح
         setPersistence(auth, browserLocalPersistence);
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                window.location.href = "Dashboard/";
+                // التأكد من التوجيه فقط إذا لم نكن بالفعل في لوحة التحكم
+                if (!window.location.pathname.includes("/Dashboard/")) {
+                    window.location.replace("Dashboard/");
+                }
             }
         });
 

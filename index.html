@@ -160,7 +160,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithRedirect, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithRedirect, onAuthStateChanged, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
@@ -175,10 +175,11 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // مراقب حالة تسجيل الدخول: سيقوم بالتوجيه بمجرد نجاح العملية
+        // تفعيل استمرار الجلسة حتى بعد إغلاق المتصفح
+        setPersistence(auth, browserLocalPersistence);
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // إذا تم العثور على مستخدم مسجل دخوله، يتم التوجيه فوراً
                 window.location.href = "Dashboard/";
             }
         });

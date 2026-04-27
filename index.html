@@ -160,7 +160,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
@@ -175,17 +175,19 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        document.getElementById('googleSignInBtn').addEventListener('click', async () => {
-            try {
-                const result = await signInWithPopup(auth, provider);
-                if (result.user) {
-                    // التوجيه إلى المجلد مباشرة بدون اسم الملف
+        // التعامل مع نتيجة التوجيه عند العودة للصفحة
+        getRedirectResult(auth)
+            .then((result) => {
+                if (result && result.user) {
                     window.location.href = "Dashboard/";
                 }
-            } catch (error) {
-                console.error("Authentication Error:", error.message);
-                alert("حدث خطأ أثناء تسجيل الدخول، يرجى المحاولة مرة أخرى.");
-            }
+            }).catch((error) => {
+                console.error("Auth Redirect Error:", error.message);
+            });
+
+        document.getElementById('googleSignInBtn').addEventListener('click', () => {
+            // استخدام Redirect بدلاً من Popup لتجنب حظر النوافذ المنبثقة
+            signInWithRedirect(auth, provider);
         });
     </script>
 

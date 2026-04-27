@@ -123,18 +123,6 @@
             color: #000000;
             border: none;
         }
-
-        /* Loading Indicator */
-        .loading-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.1);
-            backdrop-filter: blur(2px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
     </style>
 </head>
 <body>
@@ -152,14 +140,10 @@
     </header>
 
     <main class="hero">
-        <h3>استكشف خدماتنا وابدأ تجربتك الآن</h3>
+        <h3>ابدأ رحلتك التسويقية مع claudsmm</h3>
         <p>وجهتك الأفضل لخدمات التسويق الرقمي المتميزة.</p>
         <img src="https://i.postimg.cc/1R2xdZPR/IMG-5513.png" alt="Marketing Services">
     </main>
-
-    <div class="loading-overlay" id="loader">
-        <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">جاري تسجيل الدخول...</div>
-    </div>
 
     <div class="bottom-sheet">
         <button class="sheet-btn btn-google" id="googleSignInBtn">
@@ -187,23 +171,14 @@
         const provider = new GoogleAuthProvider();
 
         document.getElementById('googleSignInBtn').addEventListener('click', async () => {
-            const loader = document.getElementById('loader');
-            loader.style.display = 'flex';
-
             try {
-                // ضبط الجلسة لتكون مستمرة قبل الدخول
                 await setPersistence(auth, browserLocalPersistence);
-                
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
                     window.location.href = "Dashboard/";
                 }
             } catch (error) {
                 console.error("Auth Error:", error.message);
-                loader.style.display = 'none';
-                if (error.code !== 'auth/popup-closed-by-user') {
-                    alert("حدث خطأ، يرجى المحاولة لاحقاً.");
-                }
             }
         });
     </script>

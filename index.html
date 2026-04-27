@@ -15,7 +15,7 @@
             text-align: center;
         }
 
-        /* --- Header Section --- */
+        /* --- Header Section (No Changes) --- */
         header {
             height: 70px;
             display: flex;
@@ -62,7 +62,7 @@
             padding: 60px 20px;
         }
 
-        .hero h3 {
+        .hero h2 {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 10px;
@@ -159,7 +159,7 @@
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
-            authDomain: "claudsmm.com", 
+            authDomain: "claudsmm-1bf0e.firebaseapp.com",
             projectId: "claudsmm-1bf0e",
             storageBucket: "claudsmm-1bf0e.firebasestorage.app",
             messagingSenderId: "1028854156095",
@@ -170,24 +170,22 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // إعداد استمرارية تسجيل الدخول
+        // حل مشكلة الضغطة الأولى: تنفيذ الضبط بمجرد تحميل الصفحة
         setPersistence(auth, browserLocalPersistence);
 
         const loginBtn = document.getElementById('googleSignInBtn');
         
-        loginBtn.addEventListener('click', async () => {
+        loginBtn.onclick = async () => {
             try {
+                // استدعاء مباشر للنافذة دون انتظار عمليات أخرى
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
-                    console.log("Success:", result.user.displayName);
                     window.location.href = "Dashboard/";
                 }
             } catch (error) {
-                console.error("Auth Error Code:", error.code);
-                // هذا التنبيه سيخبرك بالضبط إذا كان الدومين غير مسموح به أو الـ Proxy مفعل
-                alert("حدث خطأ أثناء تسجيل الدخول: " + error.message);
+                console.error("Auth Error:", error.code);
             }
-        });
+        };
     </script>
 </body>
 </html>

@@ -159,7 +159,7 @@
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
-            authDomain: "claudsmm.com",
+            authDomain: "claudsmm-1bf0e.firebaseapp.com",
             projectId: "claudsmm-1bf0e",
             storageBucket: "claudsmm-1bf0e.firebasestorage.app",
             messagingSenderId: "1028854156095",
@@ -170,14 +170,12 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // حل مشكلة الضغطة الأولى: تنفيذ الضبط بمجرد تحميل الصفحة
         setPersistence(auth, browserLocalPersistence);
 
         const loginBtn = document.getElementById('googleSignInBtn');
         
         loginBtn.onclick = async () => {
             try {
-                // استدعاء مباشر للنافذة دون انتظار عمليات أخرى
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
                     window.location.href = "Dashboard/";

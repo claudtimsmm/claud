@@ -15,7 +15,7 @@
             text-align: center;
         }
 
-        /* --- Header Section (No Changes) --- */
+        /* --- Header Section --- */
         header {
             height: 70px;
             display: flex;
@@ -51,10 +51,7 @@
             background-color: #5570f4;
         }
 
-        .btn-notes { background-color: #5570f4; }
-        .btn-report { background-color: #5570f4; }
         .icon-circle:active { transform: scale(0.95); }
-
         svg { width: 20px; height: 20px; fill: #ffffff; }
 
         /* --- Welcome Section --- */
@@ -62,8 +59,8 @@
             padding: 60px 20px;
         }
 
-        .hero h2 {
-            font-size: 1.8rem;
+        .hero h3 {
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 10px;
             color: #0f172a;
@@ -121,20 +118,19 @@
         .btn-login {
             background-color: #ffffff;
             color: #000000;
-            border: none;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <button class="icon-circle btn-notes">
+        <button class="icon-circle">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </button>
 
         <div class="logo">claudsmm</div>
 
-        <button class="icon-circle btn-report">
+        <button class="icon-circle">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
         </button>
     </header>
@@ -159,7 +155,7 @@
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
-            authDomain: "claudsmm-1bf0e.firebaseapp.com",
+            authDomain: "claudsmm.com", // تم التحديث للدومين الخاص بك
             projectId: "claudsmm-1bf0e",
             storageBucket: "claudsmm-1bf0e.firebasestorage.app",
             messagingSenderId: "1028854156095",

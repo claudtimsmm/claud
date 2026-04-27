@@ -160,7 +160,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithRedirect, onAuthStateChanged, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
@@ -175,18 +175,28 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        setPersistence(auth, browserLocalPersistence);
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // التأكد من التوجيه فقط إذا لم نكن بالفعل في لوحة التحكم
-                if (!window.location.pathname.includes("/Dashboard/")) {
-                    window.location.replace("Dashboard/");
-                }
-            }
+        // إجبار جوجل على إظهار شاشة اختيار الحساب دائماً وعدم الدخول التلقائي
+        provider.setCustomParameters({
+            prompt: 'select_account'
         });
 
+        // جعل الجلسة تنتهي بمجرد إغلاق المتصفح (Session Persistence)
+        setPersistence(auth, browserSessionPersistence);
+
+        // معالجة العودة من صفحة جوجل (القاعدة الأولى)
+        getRedirectResult(auth)
+            .then((result) => {
+                if (result && result.user) {
+                    // عند الانتهاء بنجاح، يتم التوجيه للصفحة المطلوبة
+                    window.location.replace("Dashboard/");
+                }
+            })
+            .catch((error) => {
+                console.error("Auth Error:", error.message);
+            });
+
         document.getElementById('googleSignInBtn').addEventListener('click', () => {
+            // البدء بعملية تسجيل دخول جديدة دائماً عند الضغط على الزر
             signInWithRedirect(auth, provider);
         });
     </script>

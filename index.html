@@ -140,7 +140,7 @@
     </header>
 
     <main class="hero">
-        <h3>ابدأ رحلتك التسويقية مع claudsmm</h3>
+        <h3>انضم إلينا الآن بنقرة واحدة</h3>
         <p>وجهتك الأفضل لخدمات التسويق الرقمي المتميزة.</p>
         <img src="https://i.postimg.cc/1R2xdZPR/IMG-5513.png" alt="Marketing Services">
     </main>
@@ -170,17 +170,22 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        document.getElementById('googleSignInBtn').addEventListener('click', async () => {
+        // حل مشكلة الضغطة الأولى: تنفيذ الضبط بمجرد تحميل الصفحة
+        setPersistence(auth, browserLocalPersistence);
+
+        const loginBtn = document.getElementById('googleSignInBtn');
+        
+        loginBtn.onclick = async () => {
             try {
-                await setPersistence(auth, browserLocalPersistence);
+                // استدعاء مباشر للنافذة دون انتظار عمليات أخرى
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
                     window.location.href = "Dashboard/";
                 }
             } catch (error) {
-                console.error("Auth Error:", error.message);
+                console.error("Auth Error:", error.code);
             }
-        });
+        };
     </script>
 </body>
 </html>

@@ -15,7 +15,7 @@
             text-align: center;
         }
 
-        /* --- Header Section --- */
+        /* --- Header Section (No Changes) --- */
         header {
             height: 70px;
             display: flex;
@@ -51,7 +51,10 @@
             background-color: #5570f4;
         }
 
+        .btn-notes { background-color: #5570f4; }
+        .btn-report { background-color: #5570f4; }
         .icon-circle:active { transform: scale(0.95); }
+
         svg { width: 20px; height: 20px; fill: #ffffff; }
 
         /* --- Welcome Section --- */
@@ -59,8 +62,8 @@
             padding: 60px 20px;
         }
 
-        .hero h3 {
-            font-size: 1.5rem;
+        .hero h2 {
+            font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 10px;
             color: #0f172a;
@@ -118,19 +121,20 @@
         .btn-login {
             background-color: #ffffff;
             color: #000000;
+            border: none;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <button class="icon-circle">
+        <button class="icon-circle btn-notes">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
         </button>
 
         <div class="logo">claudsmm</div>
 
-        <button class="icon-circle">
+        <button class="icon-circle btn-report">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
         </button>
     </header>
@@ -150,13 +154,12 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // الإعدادات المحدثة بالدومين الخاص بك claudsmm.com
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
-            authDomain: "claudsmm.com", 
+            authDomain: "claudsmm-1bf0e.firebaseapp.com",
             projectId: "claudsmm-1bf0e",
             storageBucket: "claudsmm-1bf0e.firebasestorage.app",
             messagingSenderId: "1028854156095",
@@ -167,27 +170,20 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // حفظ جلسة الدخول
+        // حل مشكلة الضغطة الأولى: تنفيذ الضبط بمجرد تحميل الصفحة
         setPersistence(auth, browserLocalPersistence);
 
         const loginBtn = document.getElementById('googleSignInBtn');
         
         loginBtn.onclick = async () => {
             try {
-                // استخدام النافذة المنبثقة
+                // استدعاء مباشر للنافذة دون انتظار عمليات أخرى
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
-                    // الانتقال إلى لوحة التحكم عند النجاح
                     window.location.href = "Dashboard/";
                 }
             } catch (error) {
                 console.error("Auth Error:", error.code);
-                // تنبيه المستخدم في حال وجود مشكلة تقنية
-                if (error.code === 'auth/operation-not-supported-in-this-environment') {
-                    alert("تأكد من فتح الموقع عبر دومينك claudsmm.com وليس رابط github.io المباشر.");
-                } else {
-                    alert("حدث خطأ أثناء تسجيل الدخول: " + error.message);
-                }
             }
         };
     </script>

@@ -1,1 +1,0 @@
-importScripts('https://www.gstatic.com/firebasejs/auth/handler.js');

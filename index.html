@@ -10,35 +10,63 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
+            background-color: #1F1E1E;
             color: #1e293b;
             text-align: center;
         }
 
-        /* --- Header Section (No Changes) --- */
+        /* --- Header Section --- */
         header {
             height: 70px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
-            background-color: #ffffff; 
+            background-color: #FFFFFF; 
             border-bottom: 1px solid #e2e8f0;
             position: relative;
         }
 
-        .logo {
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .menu-icon span {
+            width: 20px;
+            height: 2px;
+            background-color: #5F5E5E;
+            border-radius: 2px;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .logo-text {
             font-size: 1.2rem;
             font-weight: 600;
             letter-spacing: -0.5px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            text-transform: lowercase;
-            color: #1e293b;
+            color: #5F5E5E;
+            text-transform: none;
         }
 
-        .icon-circle {
+        .lang-switch {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -48,12 +76,14 @@
             cursor: pointer;
             border: none;
             transition: transform 0.2s;
-            background-color: #5570f4;
+            background-color: #5F5E5E;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
         }
 
-        .btn-notes { background-color: #5570f4; }
-        .btn-report { background-color: #5570f4; }
-        .icon-circle:active { transform: scale(0.95); }
+        .lang-switch:active { transform: scale(0.95); }
 
         svg { width: 20px; height: 20px; fill: #ffffff; }
 
@@ -62,104 +92,205 @@
             padding: 60px 20px;
         }
 
-        .hero h2 {
+        .hero h3 {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #0f172a;
+            color: #FFFFFF;
         }
 
         .hero p {
-            color: #64748b;
+            color: #FFFFFF;
             font-size: 1rem;
             margin-bottom: 30px;
         }
 
-        .hero img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 12px;
-        }
-
-        /* --- Bottom Sheet UI --- */
+        /* --- Bottom Sheet UI (Updated for PC) --- */
         .bottom-sheet {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #5570f4;
+            background-color: #FFFFFF;
             border-top-left-radius: 24px;
             border-top-right-radius: 24px;
-            padding: 24px 20px 40px 20px;
+            padding: 30px 20px 20px 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            align-items: center;
             z-index: 1000;
         }
 
-        .sheet-btn {
-            width: 100%;
-            height: 56px;
-            border-radius: 14px;
-            border: none;
-            font-size: 16px;
+        /* PC Layout Adjustments */
+        @media (min-width: 768px) {
+            .bottom-sheet {
+                position: relative;
+                margin: 40px auto;
+                width: 400px;
+                border-radius: 24px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+            .hero {
+                padding-bottom: 20px;
+            }
+        }
+
+        .sheet-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .sheet-logo-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .sheet-logo-text {
+            font-size: 1.8rem;
             font-weight: 600;
-            cursor: pointer;
+            color: #1F1E1E;
+        }
+
+        .sheet-tagline {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1F1E1E;
+            margin-bottom: 25px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .icon-btn {
+            background-color: #1F1E1E;
+            width: 85px;
+            height: 50px;
+            border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            direction: rtl;
-        }
-
-        .btn-google {
-            background-color: #ffffff;
-            color: #000000;
-        }
-
-        .btn-login {
-            background-color: #ffffff;
-            color: #000000;
             border: none;
+            cursor: pointer;
+        }
+
+        .more-options {
+            color: #1F1E1E;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .terms-text {
+            color: #94a3b8;
+            font-size: 0.75rem;
+            margin-bottom: 25px;
+            max-width: 280px;
+            line-height: 1.4;
+        }
+
+        .login-footer {
+            width: 100%;
+            background-color: #F1F5F9;
+            margin: 0 -20px -20px -20px;
+            padding: 15px 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 767px) {
+            .login-footer {
+                width: 100vw;
+                border-radius: 0;
+            }
+        }
+
+        .login-footer span {
+            color: #1F1E1E;
+            font-weight: 600;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <button class="icon-circle btn-notes">
-            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-        </button>
+        <div class="header-left">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="logo-group">
+                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(14, 14) scale(3.2)">
+                        <path fill="none" stroke="#FFC107" stroke-width="2.2" stroke-linecap="round" d="M2 15.7647C2 18.1038 3.91878 20 6.28571 20H7" />
+                        <path fill="none" stroke="#FF9800" stroke-width="2.2" stroke-linecap="round" d="M7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647" />
+                        <path fill="none" stroke="#F44336" stroke-width="2.2" stroke-linecap="round" d="M7.11616 11.6089C6.88706 10.9978 6.7619 10.3369 6.7619 9.64706C6.7619 6.52827 9.32028 4 12.4762 4C15.4159 4 17.8371 6.19371 18.1551 9.01498M18.1551 9.01498C18.8381 9.24853 19.4623 9.60648 20 10.0614M22 14.3529C22 17.4717 19.4416 20 16.2857 20H11M14.381 9.02721C14.9767 8.81911 15.6178 8.70588 16.2857 8.70588C16.9404 8.70588 17.5693 8.81468 18.1551 9.01498" />
+                    </g>
+                    <path fill="#F44336" d="M 50,40 C 51,45.5 53.5,47.5 57,48.5 C 53.5,49.5 51,51.5 50,57 C 49,51.5 46.5,49.5 43,48.5 C 46.5,47.5 49,45.5 50,40 Z" />
+                </svg>
+                <div class="logo-text"></div>
+            </div>
+        </div>
 
-        <div class="logo">claudsmm</div>
-
-        <button class="icon-circle btn-report">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <button class="lang-switch" id="langSwitchBtn">
+            ar
         </button>
     </header>
 
     <main class="hero">
-        <h3>انضم إلينا الآن بنقرة واحدة</h3>
-        <p>وجهتك الأفضل لخدمات التسويق الرقمي المتميزة.</p>
-        <img src="https://i.postimg.cc/1R2xdZPR/IMG-5513.png" alt="Marketing Services">
+        <h3></h3>
+        <p></p>
     </main>
 
     <div class="bottom-sheet">
-        <button class="sheet-btn btn-google" id="googleSignInBtn">
-            <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-            المتابعة باستخدام حساب Google
-        </button>
-        <button class="sheet-btn btn-login">تسجيل الدخول</button>
+        <div class="sheet-logo-group">
+            <svg class="sheet-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(14, 14) scale(3.2)">
+                    <path fill="none" stroke="#FFC107" stroke-width="2.2" stroke-linecap="round" d="M2 15.7647C2 18.1038 3.91878 20 6.28571 20H7" />
+                    <path fill="none" stroke="#FF9800" stroke-width="2.2" stroke-linecap="round" d="M7.11616 11.6089C6.8475 11.5567 6.56983 11.5294 6.28571 11.5294C3.91878 11.5294 2 13.4256 2 15.7647" />
+                    <path fill="none" stroke="#F44336" stroke-width="2.2" stroke-linecap="round" d="M7.11616 11.6089C6.88706 10.9978 6.7619 10.3369 6.7619 9.64706C6.7619 6.52827 9.32028 4 12.4762 4C15.4159 4 17.8371 6.19371 18.1551 9.01498M18.1551 9.01498C18.8381 9.24853 19.4623 9.60648 20 10.0614M22 14.3529C22 17.4717 19.4416 20 16.2857 20H11M14.381 9.02721C14.9767 8.81911 15.6178 8.70588 16.2857 8.70588C16.9404 8.70588 17.5693 8.81468 18.1551 9.01498" />
+                </g>
+                <path fill="#F44336" d="M 50,40 C 51,45.5 53.5,47.5 57,48.5 C 53.5,49.5 51,51.5 50,57 C 49,51.5 46.5,49.5 43,48.5 C 46.5,47.5 49,45.5 50,40 Z" />
+            </svg>
+            <div class="sheet-logo-text"></div>
+        </div>
+        <div class="sheet-tagline"></div>
+        
+        <div class="auth-buttons">
+            <button class="icon-btn" id="googleSignInBtn">
+                <svg style="width:22px; height:22px;" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            </button>
+            <button class="icon-btn">
+                <svg style="width:24px; height:24px;" viewBox="0 0 24 24"><path fill="white" d="M12 2.04c-5.5 0-10 4.5-10 10 0 5 3.66 9.12 8.44 9.88v-6.99h-2.54v-2.89h2.54v-2.2c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.45 2.89h-2.33v6.99c4.78-.76 8.44-4.88 8.44-9.88 0-5.5-4.5-10-10-10z"/></svg>
+            </button>
+        </div>
+
+        <div class="more-options"></div>
+        
+        <div class="terms-text"></div>
+
+        <div class="login-footer"></div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyB98ZcMGXH5z20p7H9T-PXyM_29Xb0KN54",
-            authDomain: "claudsmm-1bf0e.firebaseapp.com",
+            authDomain: "claudsmm.com",
             projectId: "claudsmm-1bf0e",
             storageBucket: "claudsmm-1bf0e.firebasestorage.app",
             messagingSenderId: "1028854156095",
@@ -168,16 +299,54 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        // حل مشكلة الضغطة الأولى: تنفيذ الضبط بمجرد تحميل الصفحة
+        let currentLang = "ar";
+
+        async function loadTexts() {
+            try {
+                const docRef = doc(db, "app_data", currentLang);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    
+                    document.querySelectorAll('.logo-text, .sheet-logo-text').forEach(el => {
+                        el.innerText = data.logo_name || "";
+                    });
+
+                    document.querySelector('.hero h3').innerText = data.hero_title || "";
+                    document.querySelector('.hero p').innerText = data.hero_subtitle || "";
+                    document.querySelector('.sheet-tagline').innerText = data.tagline || "";
+                    document.querySelector('.more-options').innerText = data.more_options || "";
+                    document.querySelector('.terms-text').innerHTML = data.terms_text || "";
+                    
+                    const footer = document.querySelector('.login-footer');
+                    if (footer && data.footer_text) {
+                        footer.innerHTML = `${data.footer_text} <span>${data.login_link || ""}</span>`;
+                    }
+
+                    document.getElementById('langSwitchBtn').innerText = currentLang === 'ar' ? 'en' : 'ar';
+                }
+            } catch (error) {
+                console.error("Error loading texts:", error);
+            }
+        }
+
+        document.getElementById('langSwitchBtn').onclick = () => {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            loadTexts();
+        };
+
+        loadTexts();
+
         setPersistence(auth, browserLocalPersistence);
 
         const loginBtn = document.getElementById('googleSignInBtn');
         
         loginBtn.onclick = async () => {
             try {
-                // استدعاء مباشر للنافذة دون انتظار عمليات أخرى
                 const result = await signInWithPopup(auth, provider);
                 if (result.user) {
                     window.location.href = "Dashboard/";
